@@ -25,6 +25,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
+import android.util.Log;
+
+
 public class IntercomBridge extends CordovaPlugin {
 
     @Override protected void pluginInitialize() {
@@ -32,6 +35,7 @@ public class IntercomBridge extends CordovaPlugin {
     }
 
     @Override public void onStart() {
+        Log.d("IntercomBridge", "onStart()");
         //We also initialize intercom here just in case it has died. If Intercom is already set up, this won't do anything.
         this.setUpIntercom();
 
@@ -45,6 +49,8 @@ public class IntercomBridge extends CordovaPlugin {
     }
 
     private void setUpIntercom() {
+        Log.d("IntercomBridge", "setUpIntercom()");
+
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override public void run() {
                 try {
@@ -60,6 +66,7 @@ public class IntercomBridge extends CordovaPlugin {
                     String appId = IntercomBridge.this.preferences.getString("intercom-app-id", bundle.getString("intercom_app_id"));
 
                     Intercom.initialize(IntercomBridge.this.cordova.getActivity().getApplication(), apiKey, appId);
+                    Log.d("IntercomBridge", "after Intercom.initialize()");
                 } catch (Exception e) {
                     System.err.println("[Intercom-Cordova] ERROR: Something went wrong when initializing Intercom. Have you set your APP_ID and ANDROID_API_KEY?");
                 }
@@ -70,6 +77,8 @@ public class IntercomBridge extends CordovaPlugin {
     private enum Action {
         registerIdentifiedUser {
             @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+                Log.d("IntercomBridge", "registerIdentifiedUser()");
+
                 JSONObject options = args.optJSONObject(0);
                 String email = options.optString("email");
                 String userId = options.optString("userId");
@@ -158,6 +167,7 @@ public class IntercomBridge extends CordovaPlugin {
         setupGCM {
             @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
                 String registrationId = args.optString(0);
+                Log.d("IntercomBridge", "setupGCM(" + registrationId + ")");
 
                 int resourceId = -1; //Don't use the app icon in lollipop as it doesn't work nicely
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -175,6 +185,8 @@ public class IntercomBridge extends CordovaPlugin {
         },
         registerForPush {
             @Override void performAction(JSONArray args, CallbackContext callbackContext, CordovaInterface cordova) {
+                Log.d("IntercomBridge", "registerForPush()");
+
                 String senderId = args.optString(0);
                 if (senderId == null) {
                     callbackContext.error("[Intercom-Cordova] ERROR: Tried to setup GCM with no sender Id.");

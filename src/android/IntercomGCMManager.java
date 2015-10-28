@@ -34,13 +34,16 @@ public class IntercomGCMManager {
     private static Handler gcmHandler = new Handler();
 
     public static void setUpPush(String senderId, Context context) {
+        Log.i("GCM_SUCCESS", "setUpPush()");
         if (checkPlayServices(context)) {
             gcm = GoogleCloudMessaging.getInstance(context);
             regId = getRegistrationId(context);
 
             if (regId.isEmpty()) {
+                Log.i("GCM_SUCCESS", "call registerInBackground()");
                 registerInBackground(senderId, context);
             } else {
+                Log.i("GCM_SUCCESS", "call sendRegistrationIdToBackend() - regId: " + regId);
                 sendRegistrationIdToBackend(regId, context);
             }
         } else {
@@ -103,7 +106,7 @@ public class IntercomGCMManager {
                     sendRegistrationIdToBackend(regId, context);
                     storeRegistrationId(context, regId);
 
-                    Log.d("GCM_SUCCESS", "Current Device's Registration ID is: " + msg);
+                    Log.d("GCM_SUCCESS", "Current Device's Registration ID is: " + regId);
                 } catch (IOException ex) {
                     Log.d("GCM_ISSUE", "Error :" + ex.getMessage());
 
@@ -131,6 +134,8 @@ public class IntercomGCMManager {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             resourceId = context.getApplicationInfo().icon;
         }
-        Intercom.client().setupGCM(regId, resourceId);
+        Log.i("GCM_SUCCESS", "sendRegistrationIdToBackend() // would call setupGCM() with regId:" + regId + " resourceId: " + resourceId);
+       // Intercom.client().setupGCM(regId, resourceId);
+       // Log.i("GCM_SUCCESS", "exit sendRegistrationIdToBackend()");
     }
 }
