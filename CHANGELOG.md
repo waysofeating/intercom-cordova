@@ -1,5 +1,14 @@
 # Intercom for Cordova/PhoneGap
 
+## 1.1.4 (2016-01-11)
+
+* Updated Google Play Services for compatability with other plugins. Fixes [#31](https://github.com/intercom/intercom-cordova/issues/31).
+
+## 1.1.3 (2015-10-08)
+
+* Updated Intercom for iOS to [2.3.18](https://github.com/intercom/intercom-ios/releases/tag/2.3.18).
+* Updated Intercom for Android to [1.1.+](https://github.com/intercom/intercom-android/releases/).
+
 ## 1.1.2 (2015-10-08)
 
 * Updated Intercom for iOS to [2.3.11](https://github.com/intercom/intercom-ios/releases/tag/2.3.11).

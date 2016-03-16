@@ -9,7 +9,7 @@
 @implementation IntercomBridge : CDVPlugin
 
 - (void)pluginInitialize {
-    [Intercom setCordovaVersion:@"1.1.2"];
+    [Intercom setCordovaVersion:@"1.1.4"];
     #ifdef DEBUG
         [Intercom enableLogging];
     #endif
@@ -118,6 +118,13 @@
         previewPosition = ICMPreviewPositionBottomLeft;
     }
     [Intercom setPreviewPosition:previewPosition];
+    [self sendSuccess:command];
+}
+
+- (void)setPreviewPadding:(CDVInvokedUrlCommand*)command {
+    int x = [[command.arguments objectAtIndex:0] intValue];
+    int y = [[command.arguments objectAtIndex:1] intValue];
+    [Intercom setPreviewPaddingWithX:x y:y];
     [self sendSuccess:command];
 }
 
