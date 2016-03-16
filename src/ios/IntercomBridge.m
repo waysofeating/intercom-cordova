@@ -19,6 +19,10 @@
     NSString* appId = self.commandDelegate.settings[@"intercom-app-id"] ?: [[NSBundle mainBundle] objectForInfoDictionaryKey:@"IntercomAppId"];
 
     [Intercom setApiKey:apiKey forAppId:appId];
+
+    //Hide intercom preview until we've decided we do or don't want to see it - otherwise it appears on launch    
+    BOOL hidden = YES;
+    [Intercom setMessagesHidden:hidden];
 }
 
 - (void)registerIdentifiedUser:(CDVInvokedUrlCommand*)command {
