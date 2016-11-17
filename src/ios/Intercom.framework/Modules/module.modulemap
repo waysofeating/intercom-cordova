@@ -9,7 +9,8 @@ framework module Intercom {
 
   link framework "Foundation"
   link framework "UIKit"
-  link framework "AssetsLibrary"
+  link framework "Accelerate"
+  link framework "Photos"
   link framework "AudioToolbox"
   link framework "CFNetwork"
   link framework "CoreGraphics"

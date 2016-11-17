@@ -23,50 +23,43 @@ var intercom = {
         cordova.exec(success, error, 'Intercom', 'logEvent', [eventName, metaData]);
     },
 
+    displayMessenger: function(success, error) {
+        cordova.exec(success, error, 'Intercom', 'displayMessenger', []);
+    },
+
     displayMessageComposer: function(success, error) {
         cordova.exec(success, error, 'Intercom', 'displayMessageComposer', []);
+    },
+
+    displayMessageComposerWithInitialMessage: function(initialMessage, success, error) {
+        cordova.exec(success, error, 'Intercom', 'displayMessageComposerWithInitialMessage', [initialMessage]);
     },
 
     displayConversationsList: function(success, error) {
         cordova.exec(success, error, 'Intercom', 'displayConversationsList', []);
     },
 
+    unreadConversationCount: function(success, error) {
+        cordova.exec(success, error, 'Intercom', 'unreadConversationCount', []);
+    },
+
     VISIBLE : "VISIBLE",
     GONE    : "GONE",
 
-    setVisibility: function(visibility, success, error) {
-        cordova.exec(success, error, 'Intercom', 'setVisibility', [visibility]);
+    setLauncherVisibility: function(visibility, success, error) {
+        cordova.exec(success, error, 'Intercom', 'setLauncherVisibility', [visibility]);
     },
 
-    BOTTOM_LEFT  : "BOTTOM_LEFT",
-    BOTTOM_RIGHT : "BOTTOM_RIGHT",
-    TOP_LEFT     : "TOP_LEFT",
-    TOP_RIGHT    : "TOP_RIGHT",
-
-    setPreviewPosition: function(previewPosition, success, error) {
-        cordova.exec(success, error, 'Intercom', 'setPreviewPosition', [previewPosition]);
+    setInAppMessageVisibility: function(visibility, success, error) {
+        cordova.exec(success, error, 'Intercom', 'setInAppMessageVisibility', [visibility]);
     },
 
-    setPreviewPadding: function(x, y, success, error) {
-        cordova.exec(success, error, 'Intercom', 'setPreviewPadding', [x, y]);
+    hideMessenger: function(success, error) {
+        cordova.exec(success, error, 'Intercom', 'hideMessenger', []);
     },
 
-    //Android only: GCM handling
-    setupGCM: function(regId, success, error) {
-        cordova.exec(success, error, 'Intercom', 'setupGCM', [regId]);
-    },
-
-    openGCMMessage: function(success, error) {
-        cordova.exec(success, error, 'Intercom', 'openGCMMessage', []);
-    },
-
-    //iOS only: Push notification handling
-    setupAPN: function(deviceToken, success, error) {
-        cordova.exec(success, error, 'Intercom', 'setupAPN', [deviceToken]);
-    },
-
-    registerForPush: function(senderId, success, error) {
-        cordova.exec(success, error, 'Intercom', 'registerForPush', [senderId]);
+    registerForPush: function(success, error) {
+        cordova.exec(success, error, 'Intercom', 'registerForPush', []);
     }
 }
 
